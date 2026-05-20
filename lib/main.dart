@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 
+class Counter extends StatefulWidget {
+  const Counter({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int _counter = 0;
+
+  void _increment() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(onPressed: _increment, child: const Text("Increment")),
+        const SizedBox(width: 16),
+        Text('Count: $_counter'),
+      ],
+    );
+  }
+}
+
 void main() {
   runApp(
     const MaterialApp(
       title: "Flutter Tutorial",
-      home: Scaffold(body: Center(child: MyButton())),
+      home: Scaffold(body: Center(child: Counter())),
     ),
   );
-}
-
-class MyButton extends StatelessWidget {
-  const MyButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print("MyButton was tapped!");
-      },
-      child: Container(
-        height: 50,
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.symmetric(horizontal: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.lightGreen[500],
-        ),
-        child: const Center(child: Text("Engage")),
-      ),
-    );
-  }
 }
